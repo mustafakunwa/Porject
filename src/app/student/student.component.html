@@ -1,3 +1,43 @@
-<p>
-  student works!
-</p>
+<div class="container">
+  <form class="row">
+    <div class="col-6">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="FirstName" name="FirstName" [(ngModel)]="FirstName">
+        <button mat-button *ngIf="FirstName" matSuffix mat-icon-button aria-label="Clear" (click)="FirstName=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div class="col-6">
+      <mat-form-field>
+        <input matInput placeholder="LastName" name="LastName" [(ngModel)]="LastName">
+        <button mat-button *ngIf="LastName" matSuffix mat-icon-button aria-label="Clear" (click)="LastName=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div class="col-6">
+      <mat-form-field class="example-full-width">
+        <input matInput="number" placeholder="Mobile" name="Mobile" [(ngModel)]="Mobile">
+        <button mat-button *ngIf="Mobile" matSuffix mat-icon-button aria-label="Clear" (click)="Mobile=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div class="col-6">
+      <mat-form-field>
+        <input matInput="email" placeholder="Email" name="Email" [(ngModel)]="Email">
+        <button mat-button *ngIf="Email" matSuffix mat-icon-button aria-label="Clear" (click)="Email=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div class="col-6">
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" name="DOB" [(ngModel)]="DOB" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
