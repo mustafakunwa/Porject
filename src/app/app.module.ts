@@ -5,23 +5,27 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MyNavComponent } from './my-nav/my-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule ,MatNativeDateModule,MatDatepickerModule} from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule ,MatNativeDateModule,MatDatepickerModule,MatRadioModule,MatTableModule} from '@angular/material';
 import { StudentComponent } from './student/student.component';
 import {MatInputModule} from '@angular/material/input';
-import {FormsModule} from '@angular/forms';
+import {FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { SearchStudentComponent } from './search-student/search-student.component';
+import { AppRoutingModule } from './app-routing.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     MyNavComponent,
-    StudentComponent
+    StudentComponent,
+    SearchStudentComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     LayoutModule,
     FormsModule,
+    ReactiveFormsModule ,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
@@ -29,7 +33,10 @@ import {FormsModule} from '@angular/forms';
     MatListModule,
     MatInputModule,
     MatNativeDateModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatRadioModule,
+    AppRoutingModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
