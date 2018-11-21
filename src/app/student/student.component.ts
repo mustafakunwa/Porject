@@ -1,8 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {ErrorStateMatcher} from '@angular/material/core';
 import {Info} from '../StudentInfo'
 import {StudentService} from '../student.service'
+
+/** Error when invalid control is dirty, touched, or submitted. */
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-student',
@@ -28,12 +38,19 @@ export class StudentComponent implements OnInit {
      this.student=new Info();
    }
    submit():void{
+     
      this.StudentService.InsertStudent(this.student).subscribe(
      student=>{ 
        this.Reset()
       },
      error=>alert(error.Message)
      );
-     
   }
+
+  emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
+
+  matcher = new MyErrorStateMatcher();
 }

@@ -10,7 +10,7 @@
     </div>
     <div class="col-md-6">
       <mat-form-field>
-        <input matInput placeholder="LastName" name="LastName" [(ngModel)]="student.LastName">
+        <input matInput placeholder="LastName" name="LastName" [(ngModel)]="student.LastName" required>
         <button mat-button *ngIf="student.LastName" matSuffix mat-icon-button aria-label="Clear" (click)="student.LastName=''">
           <mat-icon>close</mat-icon>
         </button>
@@ -18,7 +18,7 @@
     </div>
     <div class="col-md-6">
       <mat-form-field class="example-full-width">
-        <input matInput type="number" placeholder="Mobile" name="Mobile" [(ngModel)]="student.Mobile">
+        <input matInput type="number" placeholder="Mobile" name="Mobile" [(ngModel)]="student.Mobile" required>
         <button mat-button *ngIf="student.Mobile" matSuffix mat-icon-button aria-label="Clear" (click)="student.Mobile=''">
           <mat-icon>close</mat-icon>
         </button>
@@ -26,21 +26,28 @@
     </div>
     <div class="col-md-6">
       <mat-form-field>
-        <input matInput type="email" placeholder="Email" name="Email" [(ngModel)]="student.Email">
+        <input matInput type="email" placeholder="Email" name="Email" [(ngModel)]="student.Email" [formControl]="emailFormControl"
+          [errorStateMatcher]="matcher" required>
         <button mat-button *ngIf="student.Email" matSuffix mat-icon-button aria-label="Clear" (click)="student.Email=''">
           <mat-icon>close</mat-icon>
         </button>
+        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="col-md-6">
       <mat-form-field>
-        <input matInput [matDatepicker]="picker" name="DOB" [(ngModel)]="student.DOB" placeholder="Choose a date">
+        <input matInput [matDatepicker]="picker" name="DOB" [(ngModel)]="student.DOB" placeholder="Choose a date" required>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
     </div>
     <div class="col-md-6">
-      <mat-radio-group name="Gender" [(ngModel)]="student.Gender">
+      <mat-radio-group name="Gender" [(ngModel)]="student.Gender" required>
         Gender
         <mat-radio-button [value]=true>Male</mat-radio-button>
         <mat-radio-button [value]=false>Female</mat-radio-button>
@@ -48,12 +55,12 @@
     </div>
     <div class="col-md-6">
       <mat-form-field>
-        <textarea matInput placeholder="Enter your Address" name="Address" [(ngModel)]="student.Address"></textarea>
+        <textarea matInput placeholder="Enter your Address" name="Address" [(ngModel)]="student.Address" required></textarea>
       </mat-form-field>
     </div>
     <div class="col-12" style="text-align:center">
-        <button mat-raised-button color="primary" (click)="submit()" >Submit</button>
-        <button mat-raised-button color="warn" (click)="Reset()" >Clear</button>
+      <button mat-raised-button color="primary" (click)="submit()">Submit</button>
+      <button mat-raised-button color="warn" (click)="Reset()">Clear</button>
     </div>
   </form>
 </div>
