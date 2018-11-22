@@ -1,33 +1,45 @@
 <div class="container">
-  <form class="row" name="StudentForm">
+  <form class="row" name="StudentForm" [formGroup]="StudentForm">
     <div class="col-md-6">
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="FirstName" name="FirstName" [(ngModel)]="student.FirstName" required>
+        <input matInput placeholder="FirstName" name="FirstName" [(ngModel)]="student.FirstName" [formControl]="FirstName"
+          [errorStateMatcher]="matcher" required>
         <button mat-button *ngIf="student.FirstName" matSuffix mat-icon-button aria-label="Clear" (click)="student.FirstName=''">
           <mat-icon>close</mat-icon>
         </button>
+        <mat-error *ngIf="FirstName.hasError('required')">
+          FirstName is <strong>required</strong>
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="col-md-6">
       <mat-form-field>
-        <input matInput placeholder="LastName" name="LastName" [(ngModel)]="student.LastName" required>
+        <input matInput placeholder="LastName" name="LastName" [(ngModel)]="student.LastName"  [formControl]="LastName" 
+         required>
         <button mat-button *ngIf="student.LastName" matSuffix mat-icon-button aria-label="Clear" (click)="student.LastName=''">
           <mat-icon>close</mat-icon>
         </button>
+        <mat-error *ngIf="LastName.hasError('required')">
+          LastName is <strong>required</strong>
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="col-md-6">
       <mat-form-field class="example-full-width">
-        <input matInput type="number" placeholder="Mobile" name="Mobile" [(ngModel)]="student.Mobile" required>
+        <input matInput type="number" placeholder="Mobile" name="Mobile" [(ngModel)]="student.Mobile" [formControl]="Mobile"
+          required>
         <button mat-button *ngIf="student.Mobile" matSuffix mat-icon-button aria-label="Clear" (click)="student.Mobile=''">
           <mat-icon>close</mat-icon>
         </button>
+        <mat-error *ngIf="Mobile.hasError('required')">
+          Mobile is <strong>required</strong>
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="col-md-6">
       <mat-form-field>
         <input matInput type="email" placeholder="Email" name="Email" [(ngModel)]="student.Email" [formControl]="emailFormControl"
-          [errorStateMatcher]="matcher" required>
+          required>
         <button mat-button *ngIf="student.Email" matSuffix mat-icon-button aria-label="Clear" (click)="student.Email=''">
           <mat-icon>close</mat-icon>
         </button>
@@ -41,13 +53,14 @@
     </div>
     <div class="col-md-6">
       <mat-form-field>
-        <input matInput [matDatepicker]="picker" name="DOB" [(ngModel)]="student.DOB" placeholder="Choose a date" required>
+        <input matInput [matDatepicker]="picker" name="DOB" [(ngModel)]="student.DOB" placeholder="Choose a date"
+        [formControl]="DOB" required>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
     </div>
     <div class="col-md-6">
-      <mat-radio-group name="Gender" [(ngModel)]="student.Gender" required>
+      <mat-radio-group name="Gender" [(ngModel)]="student.Gender" [formControl]="Gender" required>
         Gender
         <mat-radio-button [value]=true>Male</mat-radio-button>
         <mat-radio-button [value]=false>Female</mat-radio-button>
@@ -55,7 +68,7 @@
     </div>
     <div class="col-md-6">
       <mat-form-field>
-        <textarea matInput placeholder="Enter your Address" name="Address" [(ngModel)]="student.Address" required></textarea>
+        <textarea matInput placeholder="Enter your Address" name="Address" [formControl]="Address" [(ngModel)]="student.Address" required></textarea>
       </mat-form-field>
     </div>
     <div class="col-12" style="text-align:center">
