@@ -6,6 +6,7 @@ import {SearchStudentComponent} from './search-student/search-student.component'
 const routes: Routes=[
   {path:'',redirectTo:'Dashboard',pathMatch:'full'},
   {path:'Dashboard',component:StudentComponent},
+  {path: 'Dashboard/:Id', component: StudentComponent },
   {path:'SearchStudent',component:SearchStudentComponent}
 ]
 @NgModule({

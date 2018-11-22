@@ -27,7 +27,9 @@ import {
 import {
   StudentService
 } from '../student.service'
-
+import {
+  ActivatedRoute,Router
+} from '@angular/router';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -58,11 +60,20 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class StudentComponent implements OnInit {
 
   public student: Info = new Info();
-
-  constructor(private adapter: DateAdapter < any > , private StudentService: StudentService, private formBuilder: FormBuilder) {}
+  public id=0;
+  constructor(private adapter: DateAdapter < any > ,
+    private StudentService: StudentService,
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router, ) {}
 
   ngOnInit() {
     this.adapter.setLocale('en-GB');
+    this.id = +this.route.snapshot.paramMap.get('Id');
+    if (this.id != null && this.id!=0) {
+      this.StudentService.EditStudent(this.id)
+        .subscribe(student => this.student = student);
+    }
   }
 
   Reset(): void {
@@ -81,14 +92,26 @@ export class StudentComponent implements OnInit {
   });
 
   submit(): void {
-    if (this.StudentForm) {
-
-      this.StudentService.InsertStudent(this.student).subscribe(
-        student => {
-          this.Reset()
-        },
-        error => alert(error.Message)
-      );
+    if (this.StudentForm.valid) {
+      if (this.id != null && this.id!=0) {
+        this.StudentService.UpdateStudent(this.student).subscribe(
+          student => {
+            this.router.navigate(['Dashboard']);
+            alert('Successfull');
+          },
+          error => alert(error.Message)
+        );
+      }
+      else{
+       
+        this.StudentService.InsertStudent(this.student).subscribe(
+          student => {
+            this.Reset(),
+            alert('Successfull');
+          },
+          error => alert(error.Message)
+        );
+      }
     }
   }
 

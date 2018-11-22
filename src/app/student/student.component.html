@@ -2,7 +2,7 @@
   <form class="row" name="StudentForm" [formGroup]="StudentForm">
     <div class="col-md-6">
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="FirstName" name="FirstName" [(ngModel)]="student.FirstName" [formControl]="FirstName"
+        <input matInput placeholder="FirstName" name="FirstName" [(ngModel)]="student.FirstName" formControlName="FirstName"
           [errorStateMatcher]="matcher" required>
         <button mat-button *ngIf="student.FirstName" matSuffix mat-icon-button aria-label="Clear" (click)="student.FirstName=''">
           <mat-icon>close</mat-icon>
@@ -14,7 +14,7 @@
     </div>
     <div class="col-md-6">
       <mat-form-field>
-        <input matInput placeholder="LastName" name="LastName" [(ngModel)]="student.LastName"  [formControl]="LastName" 
+        <input matInput placeholder="LastName" name="LastName" [(ngModel)]="student.LastName"  formControlName="LastName" 
          required>
         <button mat-button *ngIf="student.LastName" matSuffix mat-icon-button aria-label="Clear" (click)="student.LastName=''">
           <mat-icon>close</mat-icon>
@@ -26,7 +26,7 @@
     </div>
     <div class="col-md-6">
       <mat-form-field class="example-full-width">
-        <input matInput type="number" placeholder="Mobile" name="Mobile" [(ngModel)]="student.Mobile" [formControl]="Mobile"
+        <input matInput type="number" placeholder="Mobile" name="Mobile" [(ngModel)]="student.Mobile" formControlName="Mobile"
           required>
         <button mat-button *ngIf="student.Mobile" matSuffix mat-icon-button aria-label="Clear" (click)="student.Mobile=''">
           <mat-icon>close</mat-icon>
@@ -38,7 +38,7 @@
     </div>
     <div class="col-md-6">
       <mat-form-field>
-        <input matInput type="email" placeholder="Email" name="Email" [(ngModel)]="student.Email" [formControl]="emailFormControl"
+        <input matInput type="email" placeholder="Email" name="Email" [(ngModel)]="student.Email" formControlName="emailFormControl"
           required>
         <button mat-button *ngIf="student.Email" matSuffix mat-icon-button aria-label="Clear" (click)="student.Email=''">
           <mat-icon>close</mat-icon>
@@ -54,13 +54,13 @@
     <div class="col-md-6">
       <mat-form-field>
         <input matInput [matDatepicker]="picker" name="DOB" [(ngModel)]="student.DOB" placeholder="Choose a date"
-        [formControl]="DOB" required>
+        formControlName="DOB" required>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
     </div>
     <div class="col-md-6">
-      <mat-radio-group name="Gender" [(ngModel)]="student.Gender" [formControl]="Gender" required>
+      <mat-radio-group name="Gender" [(ngModel)]="student.Gender" formControlName="Gender" required>
         Gender
         <mat-radio-button [value]=true>Male</mat-radio-button>
         <mat-radio-button [value]=false>Female</mat-radio-button>
@@ -68,7 +68,7 @@
     </div>
     <div class="col-md-6">
       <mat-form-field>
-        <textarea matInput placeholder="Enter your Address" name="Address" [formControl]="Address" [(ngModel)]="student.Address" required></textarea>
+        <textarea matInput placeholder="Enter your Address" name="Address" formControlName="Address" [(ngModel)]="student.Address" required></textarea>
       </mat-form-field>
     </div>
     <div class="col-12" style="text-align:center">
